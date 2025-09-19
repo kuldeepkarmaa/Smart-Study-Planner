@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Study Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Smart Study Planner</h1>
+      <div class="controls">
+        <button id="importBtn" class="ghost">Import JSON</button>
+        <button id="exportBtn" class="ghost">Export JSON</button>
+        <button id="clearBtn" class="ghost">Clear All</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Left panel -->
+      <section class="card" id="leftPanel">
+        <h3 id="formTitle">Create Task</h3>
+        <form id="taskForm">
+          <input type="hidden" id="taskId" />
+          <label>Title</label>
+          <input id="title" required placeholder="Chapter / Topic name" />
+
+          <label>Subject / Course</label>
+          <input id="subject" placeholder="e.g. DS, Analog" />
+
+          <label>Due date & time</label>
+          <input id="due" type="datetime-local" />
+
+          <label>Estimated duration (minutes)</label>
+          <input id="duration" type="number" min="0" placeholder="e.g. 60" />
+
+          <label>Priority</label>
+          <select id="priority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+
+          <label>Notes</label>
+          <textarea id="notes" placeholder="Optional notes or links"></textarea>
+
+          <div class="form-actions">
+            <button type="submit">Save Task</button>
+            <button type="button" id="resetBtn" class="ghost">Reset</button>
+          </div>
+        </form>
+
+        <hr />
+        <div>
+          <label>Quick add (title | due yyyy-mm-dd hh:mm)</label>
+          <input id="quick" placeholder="Example: Read chapter 2 | 2025-09-20 14:00" />
+          <div><button id="quickAdd" class="ghost">Quick Add</button></div>
+        </div>
+      </section>
+
+      <!-- Right panel -->
+      <section>
+        <div class="card">
+          <div class="topbar">
+            <div>
+              <strong id="stats">0 tasks • 0 upcoming</strong>
+              <div class="small" id="nextReminder">No reminders scheduled</div>
+            </div>
+            <div>
+              <label class="small">Filter</label>
+              <select id="filter">
+                <option value="all">All</option>
+                <option value="today">Today</option>
+                <option value="upcoming">Upcoming 7d</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="task-list" id="tasks"></div>
+
+          <div class="timeline" id="timeline">
+            <h4>Visual timeline</h4>
+            <div id="timelineRows"></div>
+          </div>
+        </div>
+
+        <footer>
+          This planner saves to your browser (Local Storage). Notifications require permission and the page to be open to fire reminders reliably.
+        </footer>
+      </section>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
